@@ -2,12 +2,12 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_multi_tenant'
-  s.version     = '1.0.0'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.version     = '0.1.0'
+  s.summary     = 'Adds multi-tenant support to Spree'
+  s.description = 'Allows completely separate Spree sites to be run from the same installation'
   s.required_ruby_version = '>= 1.8.7'
 
-  # s.author            = 'You'
+   s.author            = 'Stefan Senk'
   # s.email             = 'you@example.com'
   # s.homepage          = 'http://www.spreecommerce.com'
 
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 1.0.0'
+  s.add_dependency 'multitenant', '~> 0.4.0'
 
   s.add_development_dependency 'capybara', '1.0.1'
   s.add_development_dependency 'factory_girl'
