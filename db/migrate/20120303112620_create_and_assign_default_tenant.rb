@@ -1,10 +1,6 @@
-require 'spree_core'
-require 'spree_multi_tenant/engine'
-require 'multitenant'
-
-module SpreeMultiTenant
-  def self.tenanted_models
-    [
+class CreateAndAssignDefaultTenant < ActiveRecord::Migration
+  def up
+    models = [
       Spree::Activator,
       Spree::Address,
       Spree::Adjustment,
@@ -61,16 +57,22 @@ module SpreeMultiTenant
       Spree::ZoneMember,
       Spree::Zone
     ]
+
+    # Create the first tenant - change domain and code as appropriate
+    domain = "example"
+    code = "example"
+    tenant = Spree::Tenant.create!({:domain => domain, :code => code})
+    tenant.create_templates_path
+
+    # Assign all existing items to the tenant
+    models.each do |model|
+      model.all.each do |item|
+        item.tenant = tenant
+        item.save!
+      end
+    end
   end
 
-  def self.tenanted_controllers
-    [
-      Spree::BaseController,
-      Spree::UserPasswordsController,
-      Spree::UserSessionsController,
-      Spree::UserRegistrationsController
-    ]
+  def down
   end
-
 end
-

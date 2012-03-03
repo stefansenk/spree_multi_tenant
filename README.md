@@ -1,21 +1,56 @@
 SpreeMultiTenant
 ================
 
-Introduction goes here.
+Adds multi-tenant support to Spree. Allows completely separate Spree sites with seperate admins to be run from the same installation.
 
 
-Example
+
+Install
 =======
 
-Example goes here.
+Gemfile:
+
+    gem 'spree', :git => 'git://github.com/spree/spree.git', :branch => '1-0-stable'
+    gem 'spree_multi_tenant', :git => 'TODO'
+
+
+Genarate and run migrations:
+
+    rake spree_multi_tenant:install:migrations
+
+
+Update the domain for the tenant in the database.
+
+
+
+Usage
+=====
+
+Create a new tenant:
+
+    rake spree_multi_tenant:create_tenant domain=mydomain.com code=mydomain
+    
+
+Tenant specific templates:
+
+    app/tenants/TENANT_CODE/views
+
+
 
 Testing
--------
+=======
 
-Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
-
-    $ bundle
-    $ bundle exec rake test app
+    $ bundle install
+    $ bundle exec rake test_app
     $ bundle exec rspec spec
 
-Copyright (c) 2012 [name of extension creator], released under the New BSD License
+
+
+TODO
+====
+
+- Allow tenant specific Deface overrides.
+
+
+
+Copyright (c) 2012 Stefan Senk, released under the New BSD License

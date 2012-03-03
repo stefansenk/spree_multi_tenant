@@ -1,10 +1,6 @@
-require 'spree_core'
-require 'spree_multi_tenant/engine'
-require 'multitenant'
-
-module SpreeMultiTenant
-  def self.tenanted_models
-    [
+class AddTenantToModels < ActiveRecord::Migration
+  def change
+    models = [
       Spree::Activator,
       Spree::Address,
       Spree::Adjustment,
@@ -61,16 +57,13 @@ module SpreeMultiTenant
       Spree::ZoneMember,
       Spree::Zone
     ]
-  end
 
-  def self.tenanted_controllers
-    [
-      Spree::BaseController,
-      Spree::UserPasswordsController,
-      Spree::UserSessionsController,
-      Spree::UserRegistrationsController
-    ]
-  end
+    models.each do |model|
+      table = model.to_s.tableize.gsub '/', '_'
+      add_column table, :tenant_id, :integer
+      add_index table, :tenant_id
+    end
 
+  end
 end
 
