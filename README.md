@@ -11,7 +11,7 @@ Install
 Gemfile:
 
     gem 'spree', :git => 'git://github.com/spree/spree.git', :branch => '1-0-stable'
-    gem 'spree_multi_tenant', :git => 'git://github.com/stefansenk/spree_multi_tenant'
+    gem 'spree_multi_tenant', :git => 'git://github.com/stefansenk/spree_multi_tenant.git'
 
     $ bundle install
 

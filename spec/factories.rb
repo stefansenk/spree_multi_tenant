@@ -4,8 +4,8 @@ FactoryGirl.define do
   sequence(:code_sequence) { |n| "mydomain#{n}" }
 
   factory :tenant, :class => Spree::Tenant  do
-    domain { Factory.next :domain_sequence }
-    code { Factory.next :code_sequence }
+    domain { FactoryGirl.generate :domain_sequence }
+    code { FactoryGirl.generate :code_sequence }
   end
 
 end
