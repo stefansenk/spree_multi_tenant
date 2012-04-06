@@ -12,4 +12,6 @@ end
 
 gem 'spree', :git => 'git://github.com/spree/spree.git', :branch => '1-0-stable'
 
+
 gemspec
+

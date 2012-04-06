@@ -50,6 +50,8 @@ TODO
 ====
 
 - Allow tenant specific Deface overrides.
+- Allow same user email address to be used on multiple sites.
+- Allow same parmalink to be used on multiple sites.
 
 
 

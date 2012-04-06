@@ -67,8 +67,7 @@ class CreateAndAssignDefaultTenant < ActiveRecord::Migration
     # Assign all existing items to the tenant
     models.each do |model|
       model.all.each do |item|
-        item.tenant = tenant
-        item.save!
+        item.update_attribute(:tenant_id, tenant.id)
       end
     end
   end
