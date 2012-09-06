@@ -10,7 +10,7 @@ describe "with multiple tenants" do
 
   describe Spree::ProductsController do
     before do
-    controller.stub :current_user => Factory(:user)
+    controller.stub :current_user => FactoryGirl.create(:user)
       @product1 = FactoryGirl.create(:product, :tenant_id => @tenant1.id)
       @product2 = FactoryGirl.create(:product, :tenant_id => @tenant2.id)
     end
@@ -34,7 +34,7 @@ describe "with multiple tenants" do
 
   describe Spree::Admin::ProductsController do
     before do
-      controller.stub :current_user => Factory(:admin_user)
+      controller.stub :current_user => FactoryGirl.create(:admin_user)
       @product1 = FactoryGirl.create(:product, :tenant_id => @tenant1.id)
       @product2 = FactoryGirl.create(:product, :tenant_id => @tenant2.id)
     end
@@ -49,7 +49,7 @@ describe "with multiple tenants" do
 
   describe Spree::Admin::OrdersController do
     before do
-      controller.stub :current_user => Factory(:admin_user)
+      controller.stub :current_user => FactoryGirl.create(:admin_user)
       @order1 = FactoryGirl.create(:order, :tenant_id => @tenant1.id, :completed_at => Time.now)
       @order2 = FactoryGirl.create(:order, :tenant_id => @tenant2.id, :completed_at => Time.now)
     end

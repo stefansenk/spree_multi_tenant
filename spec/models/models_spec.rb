@@ -50,8 +50,8 @@ describe 'Models' do
     end
   end
 
-  it "when a tenant is set a new ProductGroup should have the tenant" do
-    item = Spree::ProductGroup.new
+  it "when a tenant is set a new Taxonomy should have the tenant" do
+    item = Spree::Taxonomy.new
     item.tenant.should == @tenant
   end
 

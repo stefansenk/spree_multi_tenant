@@ -11,9 +11,22 @@ class Spree::Tenant < ActiveRecord::Base
     File.join Rails.root, 'app', 'tenants', code
   end
 
-  def create_templates_path
+  def create_template_and_assets_paths
     views = File.join templates_base_path, 'views'
     FileUtils.mkdir_p views unless File.exist? views
+
+    images = File.join Rails.root, 'app','assets', 'images', 'tenants', code
+    FileUtils.mkdir_p images unless  File.exist? images
+
+    css_files = File.join Rails.root, 'app','assets', 'stylesheets', 'tenants'
+    FileUtils.mkdir_p css_files unless  File.exist? css_files
+    FileUtils.touch File.join(css_files, "#{code}.css")
+
+    js_files = File.join Rails.root, 'app','assets', 'javascripts', 'tenants'
+    FileUtils.mkdir_p js_files unless  File.exist? js_files
+    FileUtils.touch File.join(css_files, "#{code}.js")
   end
+
+  private
 
 end

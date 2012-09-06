@@ -23,11 +23,8 @@ class CreateAndAssignDefaultTenant < ActiveRecord::Migration
       Spree::Payment,
       # Spree::PendingPromotion,
       Spree::Preference,
-      Spree::ProductGroup,
-      # Spree::ProductGroupsProduct,
       Spree::ProductOptionType,
       Spree::ProductProperty,
-      Spree::ProductScope,
       Spree::Product,
       # Spree::ProductsPromotionRule,
       # Spree::ProductsTaxon,
@@ -44,7 +41,7 @@ class CreateAndAssignDefaultTenant < ActiveRecord::Migration
       Spree::Shipment,
       Spree::ShippingCategory,
       Spree::ShippingMethod,
-      Spree::StateEvent,
+      Spree::StateChange,
       Spree::State,
       Spree::TaxCategory,
       Spree::TaxRate,
@@ -59,10 +56,11 @@ class CreateAndAssignDefaultTenant < ActiveRecord::Migration
     ]
 
     # Create the first tenant - change domain and code as appropriate
-    domain = "example"
-    code = "example"
-    tenant = Spree::Tenant.create!({:domain => domain, :code => code})
-    tenant.create_templates_path
+    tenant = Spree::Tenant.new
+    tenant.domain = "example"
+    tenant.code = "example"
+    tenant.save!
+    tenant.create_template_and_assets_paths
 
     # Assign all existing items to the tenant
     models.each do |model|

@@ -18,10 +18,10 @@ describe "with multiple tenants" do
   context "visiting the products page" do
     before do
       Multitenant.with_tenant @tenant1 do
-        @product1 = FactoryGirl.create(:product)
+        @product1 = FactoryGirl.create(:product, name: 'my first product')
       end
       Multitenant.with_tenant @tenant2 do
-        @product2 = FactoryGirl.create(:product)
+        @product2 = FactoryGirl.create(:product, name: 'my second product')
       end
     end
 

@@ -4,7 +4,7 @@ describe Spree::Tenant do
 
   context 'validations' do
     before do
-      Factory(:tenant)
+      FactoryGirl.create(:tenant)
     end
     it { should validate_uniqueness_of(:domain) }
     it { should validate_uniqueness_of(:code) }
