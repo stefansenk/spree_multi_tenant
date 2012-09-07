@@ -15,6 +15,30 @@ describe "with multiple tenants" do
     @tenant2 = FactoryGirl.create(:tenant)
   end
 
+  context "visiting the homepage page" do
+    before do
+      Multitenant.with_tenant @tenant1 do
+        Spree::Config[:default_seo_title] = "Site1Title"
+      end
+      Multitenant.with_tenant @tenant2 do
+        Spree::Config[:default_seo_title] = "Site2Title"
+      end
+    end
+
+    it "homepage should display the page title for the tenant" do
+      visit "http://#{@tenant1.domain}"
+save_and_open_page
+      page.should have_content("Site1Title")
+      page.should_not have_content("Site2Title")
+    end
+
+    it "homepage should display the page title for the tenant" do
+      visit "http://#{@tenant2.domain}"
+      page.should have_content("Site2Title")
+      page.should_not have_content("Site1Title")
+    end
+  end
+
   context "visiting the products page" do
     before do
       Multitenant.with_tenant @tenant1 do

@@ -29,6 +29,7 @@ module SpreeMultiTenant
       Spree::Preference,
       Spree::ProductOptionType,
       Spree::ProductProperty,
+      #Spree::ProductScope,
       Spree::Product,
       # Spree::ProductsPromotionRule,
       # Spree::ProductsTaxon,
