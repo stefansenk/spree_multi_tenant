@@ -27,7 +27,6 @@ describe "with multiple tenants" do
 
     it "homepage should display the page title for the tenant" do
       visit "http://#{@tenant1.domain}"
-save_and_open_page
       page.should have_content("Site1Title")
       page.should_not have_content("Site2Title")
     end
