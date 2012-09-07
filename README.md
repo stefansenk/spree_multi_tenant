@@ -42,7 +42,7 @@ Tenant specific templates:
 With other Spree plugins
 ========================
 
-Any other models that are tenant specific, will need to have the tenant\_id field and multitenant scope added. 
+Any other models that are tenant specific will need to have the tenant\_id field and multitenant scope added. 
 
 Database migration:
 
@@ -61,7 +61,6 @@ Database migration:
       end
     end
 
-
 Add scope to the models:
     
     models = [
@@ -74,6 +73,17 @@ Add scope to the models:
         belongs_to :tenant
         belongs_to_multitenant
       end
+    end
+
+
+In a Raketask
+=============
+
+    Multitenant.with_tenant(Spree::Tenant.find_by_code('mydomain')) do
+      SpreeMultiTenant.init_preferences
+
+      # Do stuff for tenant
+      # e.g. Spree::Product.first
     end
 
 
