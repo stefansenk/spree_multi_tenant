@@ -17,6 +17,5 @@ module SpreeMultiTenant
 
     config.to_prepare &method(:activate).to_proc
 
-    config.default_country_iso = 'US'
   end
 end
