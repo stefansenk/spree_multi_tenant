@@ -24,7 +24,7 @@ class Spree::Tenant < ActiveRecord::Base
 
     js_files = File.join Rails.root, 'app','assets', 'javascripts', 'tenants'
     FileUtils.mkdir_p js_files unless  File.exist? js_files
-    FileUtils.touch File.join(css_files, "#{code}.js")
+    FileUtils.touch File.join(js_files, "#{code}.js")
   end
 
   private
