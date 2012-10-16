@@ -8,7 +8,7 @@ class CreateAndAssignDefaultTenant < ActiveRecord::Migration
       Spree::Calculator,
       Spree::Configuration,
       Spree::Country,
-      Spree::Creditcard,
+      Spree::CreditCard,
       Spree::Gateway,
       Spree::InventoryUnit,
       Spree::LineItem,
