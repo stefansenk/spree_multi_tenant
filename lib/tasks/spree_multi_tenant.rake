@@ -11,7 +11,10 @@ namespace :spree_multi_tenant do
       exit
     end
 
-    tenant = Spree::Tenant.create!({:domain => domain.dup, :code => code.dup})
+    tenant = Spree::Tenant.create! do |t|
+      t.domain = domain.dup
+      t.code = code.dup
+    end
     tenant.create_template_and_assets_paths
   end
 
