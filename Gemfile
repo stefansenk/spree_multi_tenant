@@ -10,7 +10,7 @@ else
   gem "ruby-debug19"
 end
 
-gem 'spree', :git => 'git://github.com/spree/spree.git', :branch => '1-1-stable'
+gem 'spree', :git => 'git://github.com/spree/spree.git', :tag => 'v1.2.0'
 
 
 gemspec
