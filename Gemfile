@@ -11,6 +11,7 @@ else
 end
 
 gem 'spree', :git => 'git://github.com/spree/spree.git', :tag => 'v1.2.0'
+gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '1-2-stable'
 
 
 gemspec
