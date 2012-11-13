@@ -90,11 +90,9 @@ In a Raketask
 
 Something like this:
 
-    Multitenant.with_tenant(Spree::Tenant.find_by_code('mydomain')) do
-      SpreeMultiTenant.init_preferences
-
-      # Do stuff for tenant
-      # e.g. Spree::Product.first
+    SpreeMultiTenant.with_tenant(Spree::Tenant.find_by_code('mydomain')) do
+      # Do stuff for tenant. e.g.
+      puts Spree::Product.first.name
     end
 
 
