@@ -17,6 +17,6 @@ SpreeMultiTenant.tenanted_models.each do |model|
   model.class_eval do
     belongs_to :tenant
     belongs_to_multitenant
-    # raise_error_if_no_tenant if Rails.env = 'production'
+    # raise_error_if_no_tenant if Rails.env = 'production'   # TODO - would this be useful?
   end
 end

@@ -27,7 +27,6 @@ SpreeMultiTenant.tenanted_controllers.each do |controller|
       
       def tenant_scope
         tenant = Spree::Tenant.find_by_domain(request.host)
-        # tenant = Spree::Tenant.find_by_domain(request.env['SERVER_NAME'])
         raise 'DomainUnknown' unless tenant
 
         # Add tenant views path
