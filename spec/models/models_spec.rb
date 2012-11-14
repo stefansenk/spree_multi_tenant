@@ -87,3 +87,38 @@ describe Spree::User do
   end
 end
 
+
+describe Spree::Taxon do
+  context 'when a tenant is set' do
+    before do
+      @tenant1 = FactoryGirl.create(:tenant)
+      @tenant2 = FactoryGirl.create(:tenant)
+
+      Multitenant.with_tenant @tenant1 do
+        @taxonomy1 = FactoryGirl.create(:taxonomy)
+        @taxon1 = FactoryGirl.create(:taxon, :taxonomy_id => @taxonomy1.id, :parent_id => @taxonomy1.root.id)
+        @taxon2 = FactoryGirl.create(:taxon, :taxonomy_id => @taxonomy1.id, :parent_id => @taxon1.id)
+        @taxon3 = FactoryGirl.create(:taxon, :taxonomy_id => @taxonomy1.id, :parent_id => @taxon2.id)
+      end
+ 
+      Multitenant.with_tenant @tenant2 do
+        @taxonomy2 = FactoryGirl.create(:taxonomy)
+        @taxon6 = FactoryGirl.create(:taxon, :taxonomy_id => @taxonomy2.id, :parent_id => @taxonomy2.root.id)
+        @taxon7 = FactoryGirl.create(:taxon, :taxonomy_id => @taxonomy2.id, :parent_id => @taxon6.id)
+        @taxon8 = FactoryGirl.create(:taxon, :taxonomy_id => @taxonomy2.id, :parent_id => @taxon7.id)
+      end
+    end
+
+    it "#ancestors should only return the tenant's ancestors" do
+      Multitenant.with_tenant @tenant1 do
+        @taxon3.ancestors.count.should == 3
+        @taxon3.lft.should == 4
+      end
+      Multitenant.with_tenant @tenant2 do
+        @taxon8.ancestors.count.should == 3
+        @taxon8.lft.should == 4
+      end
+    end
+
+  end
+end
