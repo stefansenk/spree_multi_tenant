@@ -14,6 +14,7 @@ module SpreeMultiTenant
   end
 end
 
+
 SpreeMultiTenant.tenanted_controllers.each do |controller|
   controller.class_eval do
 

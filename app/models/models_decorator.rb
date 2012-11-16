@@ -29,3 +29,4 @@ SpreeMultiTenant.tenanted_models.each do |model|
 
   end
 end
+

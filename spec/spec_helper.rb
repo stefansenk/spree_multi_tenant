@@ -51,4 +51,6 @@ RSpec.configure do |config|
 
   config.include Spree::Core::UrlHelpers
 
+  config.filter_run :focus => true
+  config.run_all_when_everything_filtered = true
 end

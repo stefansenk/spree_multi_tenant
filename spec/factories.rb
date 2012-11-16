@@ -9,3 +9,10 @@ FactoryGirl.define do
   end
 
 end
+
+
+FactoryGirl.define do
+  factory :promotion, :class => Spree::Promotion, :parent => :activator do
+    name 'Promo'
+  end
+end
