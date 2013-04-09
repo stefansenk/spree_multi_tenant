@@ -8,7 +8,7 @@ class AddTenantToModels < ActiveRecord::Migration
       "spree_calculators",
       "spree_configurations",
       "spree_countries",
-      "spree_credit_cards",
+      "spree_creditcards",
       "spree_payment_methods",
       "spree_inventory_units",
       "spree_line_items",
