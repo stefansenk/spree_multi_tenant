@@ -2,11 +2,9 @@ require 'spec_helper'
 
 def login(user, tenant=user.tenant)
   visit "http://#{tenant.domain}/login"
-  within("#existing-customer") do
-    fill_in 'user_email', :with => user.email
-    fill_in 'user_password', :with => user.password
-    click_button 'Login'
-  end
+  fill_in 'Email', :with => user.email
+  fill_in 'Password', :with => 'secret'
+  click_button 'Login'
 end
 
 describe "with multiple tenants" do

@@ -15,19 +15,18 @@ describe "with multiple tenants" do
       @product2 = FactoryGirl.create(:product, :tenant_id => @tenant2.id)
     end
 
-    # it "#index should display products for the tenant" do
-    #   pending
-    #   process(:index, {:use_route => :spree}, nil, nil, "GET")
-    #   assigns(:products).should == [@product1]
-    # end
+    it "#index should display products for the tenant" do
+      spree_get :index
+      assigns(:products).should == [@product1]
+    end
 
     it "#show should display the tenant's product" do
-      process(:show, {:use_route => :spree, :id => @product1.permalink}, nil, nil, "GET")
+      spree_get :show, :id => @product1.permalink
       assigns(:product).should == @product1
     end
 
     it "#show should not display a different tenant's product" do
-      process(:show, {:use_route => :spree, :id => @product2.permalink}, nil, nil, "GET")
+      spree_get :show, :id => @product2.permalink
       assigns(:product).should == nil
     end
   end
