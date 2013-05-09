@@ -1,6 +1,8 @@
 SpreeMultiTenant
 ================
 
+[![Build Status](https://travis-ci.org/stefansenk/spree_multi_tenant.png)](https://travis-ci.org/stefansenk/spree_multi_tenant)
+
 Adds multi-tenant support to Spree. Allows completely separate Spree sites with separate admins to be run from the same installation.
 
 
