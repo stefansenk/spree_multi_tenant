@@ -17,7 +17,6 @@ module SpreeMultiTenant
       Spree::InventoryUnit,
       Spree::LineItem,
       Spree::LogEntry,
-      Spree::MailMethod,
       Spree::OptionType,
       Spree::OptionValue,
       Spree::Order,
