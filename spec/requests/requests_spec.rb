@@ -122,7 +122,7 @@ describe "with multiple tenants" do
     end
 
     it "#show should display the tenant's order" do
-      visit "http://#{@tenant1.domain}/admin/orders/#{@order1.number}"
+      visit "http://#{@tenant1.domain}/admin/orders/#{@order1.number}/edit"
       page.should have_content(@order1.number)
       page.should_not have_content(@order2.number)
     end
