@@ -16,8 +16,8 @@ else
   gem "ruby-debug19"
 end
 
-gem 'spree', :git => 'git://github.com/spree/spree.git', :branch => '2-0-stable'
-gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '2-0-stable'
+gem 'spree', '2.1.1' #:git => 'git://github.com/spree/spree.git', :branch => '2-0-stable'
+gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '2-1-stable'
 
 gemspec
 
