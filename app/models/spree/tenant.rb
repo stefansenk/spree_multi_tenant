@@ -1,5 +1,5 @@
 class Spree::Tenant < ActiveRecord::Base
-  attr_accessible :domain, :code
+#  attr_accessible :domain, :code
 
   validates_presence_of :domain
   validates_uniqueness_of :domain
