@@ -4,11 +4,11 @@ group :test do
   gem 'ffaker'
 end
 
-group :assets do
-  gem 'sass-rails', "~> 3.2"
-  gem 'coffee-rails', "~> 3.2"
-  gem 'therubyracer'
-end
+#group :assets do
+#  gem 'sass-rails', "~> 3.2"
+#  gem 'coffee-rails', "~> 3.2"
+#  gem 'therubyracer'
+#end
 
 if RUBY_VERSION < "1.9"
   gem "ruby-debug"
