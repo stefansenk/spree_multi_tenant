@@ -13,7 +13,6 @@ class AddTenantToModels < ActiveRecord::Migration
       "spree_inventory_units",
       "spree_line_items",
       "spree_log_entries",
-      "spree_mail_methods",
       "spree_option_types",
       "spree_option_values",
       "spree_orders",

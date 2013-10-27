@@ -1,12 +1,21 @@
 class Spree::Tenant < ActiveRecord::Base
-  attr_accessible :domain, :code
 
-  validates_presence_of :domain
-  validates_uniqueness_of :domain
+  validates :domain, presence: true 
+  validates :domain, uniqueness: true
   
-  validates_presence_of :code
-  validates_uniqueness_of :code
+  validates :code, presence: true
+  validates :code, uniqueness: true
 
+  validate :domain_should_be_valid
+
+
+  def domain_should_be_valid
+    begin
+      uri = URI.parse('http://'+domain)
+      rescue Exception => e   
+        errors.add(:domain, "This domain name is invalid")
+    end
+  end
 
   def templates_base_path
     File.join Rails.root, 'app', 'tenants', code
