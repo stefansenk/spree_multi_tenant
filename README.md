@@ -11,9 +11,9 @@ Install
 
 Gemfile:
 
-    gem 'spree', '2.1.1'
-    gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise.git', :branch => '2-1-stable'
-    gem 'spree_multi_tenant', :git => 'git://github.com/stefansenk/spree_multi_tenant.git'
+    gem 'spree', github: 'spree/spree', branch: '2-1-stable'
+    gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-1-stable'
+    gem 'spree_multi_tenant', github: 'stefansenk/spree_multi_tenant', branch: '2-1-stable'
 
     $ bundle install
 
@@ -119,4 +119,4 @@ TODO
 - Initialise preferences.
 
 
-Copyright (c) 2012 Stefan Senk, released under the New BSD License
+Copyright (c) 2014 Stefan Senk, released under the New BSD License
