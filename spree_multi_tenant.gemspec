@@ -17,13 +17,14 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 2.1.0'
-#  s.add_dependency 'spree_auth_devise'
   s.add_dependency 'multitenant'
 
   s.add_development_dependency 'capybara', '~> 1.1.0'
   s.add_development_dependency 'factory_girl'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'shoulda'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'sqlite3'
