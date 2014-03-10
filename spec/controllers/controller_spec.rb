@@ -10,9 +10,13 @@ describe "with multiple tenants" do
 
   describe Spree::ProductsController do
     before do
-    controller.stub :current_user => FactoryGirl.create(:user)
-      @product1 = FactoryGirl.create(:product, :tenant_id => @tenant1.id)
-      @product2 = FactoryGirl.create(:product, :tenant_id => @tenant2.id)
+      controller.stub :current_user => FactoryGirl.create(:user)
+      Multitenant.with_tenant @tenant1 do
+        @product1 = FactoryGirl.create(:product)
+      end
+      Multitenant.with_tenant @tenant2 do
+        @product2 = FactoryGirl.create(:product)
+      end
     end
 
     it "#index should display products for the tenant" do
