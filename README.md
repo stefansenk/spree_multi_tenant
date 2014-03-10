@@ -27,7 +27,7 @@ Generate and run migrations:
 Creating the first tenant
 =========================
 
-Create the fist tenant and assign all existing items to it:
+Create the first tenant and assign all existing items to it:
 
     $ bundle exec rake spree_multi_tenant:create_tenant_and_assign domain=mydomain.com code=mydomain
     

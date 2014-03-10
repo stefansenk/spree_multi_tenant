@@ -46,25 +46,25 @@ describe Spree::Api::Config do
   end
 end
 
-describe Spree::Dash::Config do
-  before do
-    @tenant1 = FactoryGirl.create(:tenant)
-    @tenant2 = FactoryGirl.create(:tenant)
+# describe Spree::Dash::Config do
+#   before do
+#     @tenant1 = FactoryGirl.create(:tenant)
+#     @tenant2 = FactoryGirl.create(:tenant)
 
-    SpreeMultiTenant.with_tenant @tenant1 do
-      Spree::Dash::Config[:app_id] = "App1"
-    end
-    SpreeMultiTenant.with_tenant @tenant2 do
-      Spree::Dash::Config[:app_id] = "App2"
-    end
-  end
+#     SpreeMultiTenant.with_tenant @tenant1 do
+#       Spree::Dash::Config[:app_id] = "App1"
+#     end
+#     SpreeMultiTenant.with_tenant @tenant2 do
+#       Spree::Dash::Config[:app_id] = "App2"
+#     end
+#   end
 
-  it "should have the right preference for the tenant" do
-    SpreeMultiTenant.with_tenant @tenant1 do
-      Spree::Dash::Config.app_id.should == "App1"
-    end
-    SpreeMultiTenant.with_tenant @tenant2 do
-      Spree::Dash::Config.app_id.should == "App2"
-    end
-  end
-end
+#   it "should have the right preference for the tenant" do
+#     SpreeMultiTenant.with_tenant @tenant1 do
+#       Spree::Dash::Config.app_id.should == "App1"
+#     end
+#     SpreeMultiTenant.with_tenant @tenant2 do
+#       Spree::Dash::Config.app_id.should == "App2"
+#     end
+#   end
+# end

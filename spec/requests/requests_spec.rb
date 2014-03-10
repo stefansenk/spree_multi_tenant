@@ -163,31 +163,31 @@ describe "with multiple tenants" do
   end
 
 
-  context "dash config" do
-    before do
-      Multitenant.with_tenant @tenant1 do
-        Spree::Dash::Config[:app_id] = "AppId1"
-        Spree::Dash::Config[:site_id] = "SiteId1"
-        Spree::Dash::Config[:token] = "TokenId1"
-      end
-      Multitenant.with_tenant @tenant2 do
-        Spree::Dash::Config[:app_id] = "AppId2"
-        Spree::Dash::Config[:site_id] = "SiteId2"
-        Spree::Dash::Config[:token] = "TokenId2"
-      end
-    end
+  # context "dash config" do
+  #   before do
+  #     Multitenant.with_tenant @tenant1 do
+  #       Spree::Dash::Config[:app_id] = "AppId1"
+  #       Spree::Dash::Config[:site_id] = "SiteId1"
+  #       Spree::Dash::Config[:token] = "TokenId1"
+  #     end
+  #     Multitenant.with_tenant @tenant2 do
+  #       Spree::Dash::Config[:app_id] = "AppId2"
+  #       Spree::Dash::Config[:site_id] = "SiteId2"
+  #       Spree::Dash::Config[:token] = "TokenId2"
+  #     end
+  #   end
 
-    it "homepage should indlude the jirafe id for the tenant" do
-      visit "http://#{@tenant1.domain}"
-      page.find('head').should have_content("SiteId1")
-      page.find('head').should_not have_content("SiteId2")
+  #   it "homepage should indlude the jirafe id for the tenant" do
+  #     visit "http://#{@tenant1.domain}"
+  #     page.find('head').should have_content("SiteId1")
+  #     page.find('head').should_not have_content("SiteId2")
 
-      visit "http://#{@tenant2.domain}"
-      page.find('head').should_not have_content("SiteId1")
-      page.find('head').should have_content("SiteId2")
-    end
+  #     visit "http://#{@tenant2.domain}"
+  #     page.find('head').should_not have_content("SiteId1")
+  #     page.find('head').should have_content("SiteId2")
+  #   end
 
-  end
+  # end
 
 end
 
