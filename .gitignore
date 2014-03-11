@@ -22,6 +22,8 @@ db/*.sql
 db/*.sqlite3*
 db/schema.rb
 doc/**/*
+.sass-cache
+coverage
 Gemfile.lock
 */Gemfile
 */Gemfile.lock
@@ -46,6 +48,7 @@ coverage/*
 var
 TAGS
 nbproject
+pkg
 vendor/extensions/theme_default/app/stylesheets/*.css
 tags
 *.swp
@@ -54,5 +57,5 @@ test_app
 .rvmrc
 **/coverage
 */.sass-cache
-spec/dummy/*
+spec/dummy
 sass/*

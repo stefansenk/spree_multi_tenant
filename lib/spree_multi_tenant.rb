@@ -5,7 +5,6 @@ require 'multitenant'
 module SpreeMultiTenant
   def self.tenanted_models
     [
-      Spree::Activator,
       Spree::Address,
       Spree::Adjustment,
       Spree::Asset,
@@ -22,6 +21,7 @@ module SpreeMultiTenant
       Spree::Order,
       Spree::PaymentMethod,
       Spree::Payment,
+      Spree::PaymentCaptureEvent,
       Spree::Preference,
       Spree::ProductOptionType,
       Spree::ProductProperty,
@@ -33,8 +33,11 @@ module SpreeMultiTenant
       Spree::Shipment,
       Spree::ShippingCategory,
       Spree::ShippingMethod,
+      Spree::ShippingMethodCategory,
+      Spree::ShippingRate,
       Spree::StateChange,
       Spree::State,
+      Spree::StockMovement,
       Spree::TaxCategory,
       Spree::TaxRate,
       Spree::Taxonomy,

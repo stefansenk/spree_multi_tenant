@@ -23,21 +23,11 @@ describe Spree::Product do
     end
 
     it "permalinks can be the same for different tenants" do
-      pending
-      # item = FactoryGirl.build(:product, :permalink => @item2.permalink)
+      item = FactoryGirl.build(:product, :slug => @item2.slug)
       item = @item2.clone
       item.id = nil
       item.tenant = @tenant1
       item.should be_valid
-    end
-
-    it "permalinks can not be the same for the same tenant" do
-      pending
-      # item = FactoryGirl.build(:product, :permalink => @item1.permalink)
-      item = @item1.clone
-      item.id = nil
-      item.should_not be_valid
-      item.errors.should include(:permalink)
     end
 
   end

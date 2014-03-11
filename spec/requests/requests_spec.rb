@@ -25,14 +25,14 @@ describe "with multiple tenants" do
 
     it "homepage should display the page title for the tenant" do
       visit "http://#{@tenant1.domain}"
-      page.should have_content("Site1Title")
-      page.should_not have_content("Site2Title")
+      page.title.should include("Site1Title")
+      page.title.should_not include("Site2Title")
     end
 
     it "homepage should display the page title for the tenant" do
       visit "http://#{@tenant2.domain}"
-      page.should have_content("Site2Title")
-      page.should_not have_content("Site1Title")
+      page.title.should include("Site2Title")
+      page.title.should_not include("Site1Title")
     end
   end
 
@@ -53,13 +53,13 @@ describe "with multiple tenants" do
     end
 
     it "#show should display the tenant's product" do
-      visit "http://#{@tenant1.domain}/products/#{@product1.permalink}"
+      visit "http://#{@tenant1.domain}/products/#{@product1.slug}"
       page.should have_content(@product1.name)
       page.should_not have_content(@product2.name)
     end
 
     it "#show should not display a different tenant's product" do
-      visit "http://#{@tenant1.domain}/products/#{@product2.permalink}"
+      visit "http://#{@tenant1.domain}/products/#{@product2.slug}"
       page.should_not have_content(@product2.name)
       page.status_code.should == 404
     end
@@ -127,13 +127,11 @@ describe "with multiple tenants" do
       page.should_not have_content(@order2.number)
     end
 
-    # it "#show should not display a different tenant's order" do
-    #   pending
-    #   visit "http://#{@tenant1.domain}/admin/orders/#{@order2.number}"
-    #   page.should_not have_content(@order1.number)
-    #   page.status_code.should == 404
-    # end
-
+    it "#show should not display a different tenant's order" do
+      lambda {
+        visit "http://#{@tenant1.domain}/admin/orders/#{@order2.number}/edit"
+      }.should raise_exception(ActiveRecord::RecordNotFound)
+    end
   end
 
   context "visiting the admin promotions page" do
@@ -153,41 +151,7 @@ describe "with multiple tenants" do
       page.should have_content("MyPromo1")
       page.should_not have_content("MyPromo2")
     end
-
-    it "should be able to edit the promotion" do
-      visit "http://#{@tenant1.domain}/admin/promotions"
-      click_on 'Edit'
-      pending
-    end
-
   end
-
-
-  # context "dash config" do
-  #   before do
-  #     Multitenant.with_tenant @tenant1 do
-  #       Spree::Dash::Config[:app_id] = "AppId1"
-  #       Spree::Dash::Config[:site_id] = "SiteId1"
-  #       Spree::Dash::Config[:token] = "TokenId1"
-  #     end
-  #     Multitenant.with_tenant @tenant2 do
-  #       Spree::Dash::Config[:app_id] = "AppId2"
-  #       Spree::Dash::Config[:site_id] = "SiteId2"
-  #       Spree::Dash::Config[:token] = "TokenId2"
-  #     end
-  #   end
-
-  #   it "homepage should indlude the jirafe id for the tenant" do
-  #     visit "http://#{@tenant1.domain}"
-  #     page.find('head').should have_content("SiteId1")
-  #     page.find('head').should_not have_content("SiteId2")
-
-  #     visit "http://#{@tenant2.domain}"
-  #     page.find('head').should_not have_content("SiteId1")
-  #     page.find('head').should have_content("SiteId2")
-  #   end
-
-  # end
 
 end
 

@@ -1,7 +1,6 @@
 class AddTenantToModels < ActiveRecord::Migration
   def change
     tables = [
-      "spree_activators",
       "spree_addresses",
       "spree_adjustments",
       "spree_assets",

@@ -11,17 +11,22 @@ Install
 
 Gemfile:
 
-    gem 'spree', github: 'spree/spree', branch: '2-1-stable'
-    gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-1-stable'
-    gem 'spree_multi_tenant', github: 'stefansenk/spree_multi_tenant', branch: '2-1-stable'
+```ruby
+gem 'spree', github: 'spree/spree', branch: '2-2-stable'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-2-stable'
+gem 'spree_multi_tenant', github: 'stefansenk/spree_multi_tenant', branch: '2-2-stable'
+```
 
-    $ bundle install
-
+```shell
+bundle install
+```
 
 Generate and run migrations:
 
-    $ rake spree_multi_tenant:install:migrations
-    $ rake db:migrate
+```shell
+bundle exec rake spree_multi_tenant:install:migrations
+bundle exec rake db:migrate
+````
     
 
 Creating the first tenant
@@ -29,14 +34,18 @@ Creating the first tenant
 
 Create the first tenant and assign all existing items to it:
 
-    $ bundle exec rake spree_multi_tenant:create_tenant_and_assign domain=mydomain.com code=mydomain
-    
+```shell
+bundle exec rake spree_multi_tenant:create_tenant_and_assign domain=mydomain.com code=mydomain
+
+```    
 
 Put tenant specific template, CSS and JS files here:
 
-    app/tenants/mydomain/views/
-    app/assets/stylesheets/tenants/mydomain.css
-    app/assets/javascripts/tenants/mydomain.js
+```
+app/tenants/mydomain/views/
+app/assets/stylesheets/tenants/mydomain.css
+app/assets/javascripts/tenants/mydomain.js
+```
 
 
 Creating more tenants
@@ -44,11 +53,15 @@ Creating more tenants
 
 Create another tenant (without anything assigned):
 
-    $ bundle exec rake spree_multi_tenant:create_tenant domain=anotherdomain.com code=anotherdomain
+```shell
+bundle exec rake spree_multi_tenant:create_tenant domain=anotherdomain.com code=anotherdomain
+```
 
 Or from the console:
 
-    > Spree::Tenant.create({domain: "anotherdomain.com", code: "anotherdomain"})
+```ruby
+Spree::Tenant.create({domain: "anotherdomain.com", code: "anotherdomain"})
+```
 
 
 With other Spree plugins
@@ -58,33 +71,37 @@ Any other models that are to be tenant specific will need to have the tenant\_id
 
 Database migration (e.g. db/migrate/XXXXXXXXXXXXXX_add_tenant_to_some_models.rb):
 
-    class AddTenantToSomeModels < ActiveRecord::Migration
-      def change
-        tables = [
-          "spree_pages",
-          "spree_paypal_accounts",
-          "spree_product_groups",
-        ]
-        tables.each do |table|
-          add_column table, :tenant_id, :integer
-          add_index table, :tenant_id
-        end
-      end
+```ruby
+class AddTenantToSomeModels < ActiveRecord::Migration
+  def change
+    tables = [
+      "spree_pages",
+      "spree_paypal_accounts",
+      "spree_product_groups",
+    ]
+    tables.each do |table|
+      add_column table, :tenant_id, :integer
+      add_index table, :tenant_id
     end
+  end
+end
+```
 
 Add scope to the models (e.g. app/models/multitenant_decorator.rb):
     
-    models = [
-      Spree::Page,
-      Spree::PaypalAccount,
-      Spree::ProductGroup,
-    ]
-    models.each do |model|
-      model.class_eval do
-        belongs_to :tenant
-        belongs_to_multitenant
-      end
-    end
+```ruby
+models = [
+  Spree::Page,
+  Spree::PaypalAccount,
+  Spree::ProductGroup,
+]
+models.each do |model|
+  model.class_eval do
+    belongs_to :tenant
+    belongs_to_multitenant
+  end
+end
+```
 
 
 In a Raketask
@@ -92,19 +109,22 @@ In a Raketask
 
 Something like this:
 
-    SpreeMultiTenant.with_tenant(Spree::Tenant.find_by_code('mydomain')) do
-      # Do stuff for tenant. e.g.
-      puts Spree::Product.first.name
-    end
+```ruby
+SpreeMultiTenant.with_tenant(Spree::Tenant.find_by_code('mydomain')) do
+  # Do stuff for tenant. e.g.
+  puts Spree::Product.first.name
+end
+```
 
 
 Testing
 =======
 
-    $ cd spree_multi_tenant
-    $ bundle install
-    $ bundle exec rake test_app
-    $ bundle exec rspec spec
+```shell
+bundle
+bundle exec rake test_app
+bundle exec rspec spec
+```
 
 
 TODO
