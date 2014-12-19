@@ -42,7 +42,6 @@ module SpreeMultiTenant
       Spree::TaxRate,
       Spree::Taxonomy,
       Spree::Taxon,
-      Spree::TokenizedPermission,
       Spree::Tracker,
       Spree::User,
       Spree::Variant,
