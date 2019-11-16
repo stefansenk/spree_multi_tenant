@@ -9,7 +9,7 @@ module SpreeMultiTenant
       Spree::Adjustment,
       Spree::Asset,
       Spree::Calculator,
-      Spree::Configuration,
+      Spree::AppConfiguration,
       Spree::Country,
       Spree::CreditCard,
       Spree::Gateway,
@@ -90,4 +90,3 @@ module SpreeMultiTenant
   end
 
 end
-
