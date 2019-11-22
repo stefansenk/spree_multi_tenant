@@ -9,7 +9,7 @@ module SpreeMultiTenant
       Spree::Adjustment,
       Spree::Asset,
       Spree::Calculator,
-      Spree::Configuration,
+      Spree::AppConfiguration,
       Spree::Country,
       Spree::CreditCard,
       Spree::Gateway,
@@ -42,8 +42,6 @@ module SpreeMultiTenant
       Spree::TaxRate,
       Spree::Taxonomy,
       Spree::Taxon,
-      Spree::TokenizedPermission,
-      Spree::Tracker,
       Spree::User,
       Spree::Variant,
       Spree::ZoneMember,
@@ -90,4 +88,3 @@ module SpreeMultiTenant
   end
 
 end
-
