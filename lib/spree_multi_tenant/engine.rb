@@ -18,5 +18,11 @@ module SpreeMultiTenant
     end
 
     config.to_prepare &method(:activate).to_proc
+
+    # Disable caching because Spree caching doesn't work with multitenant.
+    #   For example: Rails.cache('default_store')
+    initializer 'spree_multi_tenant.disable_caching' do |app|
+      app.config.cache_store = :null_store
+    end
   end
 end

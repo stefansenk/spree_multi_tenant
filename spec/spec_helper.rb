@@ -36,7 +36,7 @@ require 'spree/../../config/routes'
 require 'spree_multi_tenant/factories'
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # == URL Helpers
   #
@@ -71,8 +71,11 @@ RSpec.configure do |config|
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
+  config.before(:each, :js) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
   config.before :each do
-    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
   end
 
