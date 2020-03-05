@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   # Define your Spree extensions Factories within this file to enable applications, and other extensions to use and override them.
   #
   # Example adding this to your spec_helper will load these Factories for use:
@@ -8,8 +8,12 @@ FactoryGirl.define do
   sequence(:code_sequence) { |n| "mydomain#{n}" }
 
   factory :tenant, :class => Spree::Tenant  do
-    domain { FactoryGirl.generate :domain_sequence }
-    code { FactoryGirl.generate :code_sequence }
+    domain { FactoryBot.generate :domain_sequence }
+    code { FactoryBot.generate :code_sequence }
   end
-    
+
+end
+
+# Define SpreeMultiTenant::Factories.  Otherwise Zeitwerk::NameError
+module SpreeMultiTenant::Factories
 end

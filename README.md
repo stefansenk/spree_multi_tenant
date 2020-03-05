@@ -9,12 +9,24 @@ Adds multi-tenant support to Spree. Allows completely separate Spree sites with 
 Install
 =======
 
+Disable caching in `config/application.rb` (and check `config/environments/*`):
+
+```ruby
+config.cache_store = :memory_store, {size: 0}
+```
+
+Set ActiveJob's queue adapter to a persistent implementation such as `:delayed_job` or `:sidekiq`.  Do not use `:async` or `:inline`.
+
+```ruby
+config.active_job.queue_adapter = :delayed_job
+```
+
 Gemfile:
 
 ```ruby
-gem 'spree', github: 'spree/spree', branch: '2-2-stable'
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-2-stable'
-gem 'spree_multi_tenant', github: 'stefansenk/spree_multi_tenant', branch: '2-2-stable'
+gem 'spree'
+gem 'spree_auth_devise'
+gem 'spree_multi_tenant'
 ```
 
 ```shell
@@ -103,6 +115,18 @@ models.each do |model|
 end
 ```
 
+Customizing controller and mailer behavior
+====================
+
+In order to customize the default controller or mailer behavior, it might be necessary
+to disable the default behavior in `config/initializers/spree_multi_tenant.rb`
+
+```ruby
+SpreeMultiTenant.configure do |config|
+  config.use_tenanted_controllers = false
+  config.use_tenanted_mailers = false
+end
+```
 
 In a Raketask
 =============
@@ -131,9 +155,7 @@ TODO
 ====
 
 - Don't require spree_auth_devise as a depandancy.
-- Allow same user email address to be used on multiple sites.
 - Allow tenant specific Deface overrides.
-- Allow same parmalinks to be used on multiple sites.
 - Example CSS and JS files.
 - Should CSS and JS files be grouped under app/tenants instead of app/assets? (e.g. app/tenants/mydomain/assets/stylesheets/store.css)
 - Initialise preferences.

@@ -12,6 +12,10 @@ module SpreeMultiTenant
       def add_stylesheets
         inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/spree_multi_tenant\n", :before => /\*\//, :verbose => true
         inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/spree_multi_tenant\n", :before => /\*\//, :verbose => true
+
+        # Disable caching.
+        # TODO Do this in a better place.
+        prepend_file 'config/environments/test.rb', "Dummy::Application.configure{ config.cache_store = :memory_store, {size: 0} } \# Disable caching for spree_multi_tenant\n"
       end
 
       def add_migrations

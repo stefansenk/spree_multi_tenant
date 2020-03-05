@@ -1,4 +1,8 @@
 class Spree::Tenant < ActiveRecord::Base
+  SpreeMultiTenant.tenanted_models.each do |model_class|
+    has_many model_class.name.demodulize.pluralize.underscore.to_sym,
+      class_name: model_class.name
+  end
 
   validates :domain, presence: true 
   validates :domain, uniqueness: true

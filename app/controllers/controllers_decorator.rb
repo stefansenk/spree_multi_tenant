@@ -16,9 +16,11 @@ end
 
 
 SpreeMultiTenant.tenanted_controllers.each do |controller|
+  next if !SpreeMultiTenant.configuration.use_tenanted_controllers
+
   controller.class_eval do
 
-    prepend_around_filter :tenant_scope
+    prepend_around_action :tenant_scope
 
     def current_tenant
       Multitenant.current_tenant
@@ -41,4 +43,8 @@ SpreeMultiTenant.tenanted_controllers.each do |controller|
       end
 
   end
+end
+
+# Define ControllersDecorator.  Otherwise Zeitwerk::NameError
+module ControllersDecorator
 end

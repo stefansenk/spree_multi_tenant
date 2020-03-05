@@ -17,7 +17,21 @@ SpreeMultiTenant.tenanted_models.each do |model|
   model.class_eval do
 
     belongs_to :tenant
-    belongs_to_multitenant
+
+    # Override belongs_to_multitenant implementation in multitenant gem, because
+    #  the default_scope implementation fails with current ActiveRecord:
+    #    ArgumentError: nil is not an ActiveRecord::Relation
+    # TODO: Upstream pull request to fix this in source gem.
+    def self.belongs_to_multitenant_fixed(association = :tenant)
+      reflection = reflect_on_association association
+      before_validation Proc.new {|m|
+        m.send("#{association}=".to_sym, Multitenant.current_tenant) if Multitenant.current_tenant
+      }, :on => :create
+      default_scope lambda {
+        Multitenant.current_tenant ? where({reflection.foreign_key => Multitenant.current_tenant.id}) : all
+      }
+    end
+    belongs_to_multitenant_fixed
     # raise_error_if_no_tenant if Rails.env = 'production'   # TODO - would this be useful?
 
     # always scope these models with the tenant, even if requested unscoped
@@ -42,3 +56,6 @@ Spree::Core::Search::Base.class_eval do
     end
 end
 
+# Define ModelsDecorator.  Otherwise Zeitwerk::NameError
+module ModelsDecorator
+end

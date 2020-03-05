@@ -20,15 +20,15 @@ describe "spree_multi_tenant raketasks" do
 
   context "create_tenant_and_assign" do
     it "should create a new tenant and assign all exisiting items to the tenant" do
-      product = FactoryGirl.create(:product)
-      product.tenant.should be_nil
+      store = FactoryBot.create(:store, tenant_id: 0)
+      store.tenant.should be_nil
 
       ENV["domain"] = "somedomain.com"
       ENV["code"] = "somedomain"
       Rake::Task['spree_multi_tenant:create_tenant_and_assign'].invoke
 
-      product.reload.tenant.domain.should == "somedomain.com"
-      product.reload.tenant.code.should == "somedomain"
+      store.reload.tenant.domain.should == "somedomain.com"
+      store.reload.tenant.code.should == "somedomain"
     end
   end
 

@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Spree::Tenant do
+describe Spree::Tenant, type: :model do
 
   context 'validations' do
     before do
-      FactoryGirl.create(:tenant)
+      FactoryBot.create(:tenant)
     end
     it { should validate_uniqueness_of(:domain) }
     it { should validate_uniqueness_of(:code) }
